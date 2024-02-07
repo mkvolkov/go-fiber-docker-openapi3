@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  description: Employee2 API, Learning Golang CRUD & OpenAPI 3.0
+  description: Employees API, Demo Golang CRUD & OpenAPI 3.0
   title: Employee2 API
   version: "2.0"
 paths:

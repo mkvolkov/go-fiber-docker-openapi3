@@ -40,7 +40,7 @@ func CreateOpenAPI() {
 	reflector.Spec.Info.
 		WithTitle("Employee2 API").
 		WithVersion("2.0").
-		WithDescription("Employee2 API, Learning Golang CRUD & OpenAPI 3.0")
+		WithDescription("Employees API, Demo Golang CRUD & OpenAPI 3.0")
 
 	hireEmp, _ := reflector.NewOperationContext(http.MethodPut, "/hire")
 	hireEmp.AddReqStructure(new(Employee))

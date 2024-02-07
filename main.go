@@ -8,6 +8,8 @@ import (
 	"employees/repository"
 	"flag"
 	"log"
+	"os"
+	"os/signal"
 
 	"github.com/knadh/koanf/parsers/yaml"
 	"github.com/knadh/koanf/providers/file"
@@ -54,5 +56,14 @@ func main() {
 	fHandlers := handlers.NewHandler(empLogic)
 
 	fHandlers.CreateRoutes(fSrv.FiberApp)
+
+	doneCh := make(chan os.Signal, 1)
+	signal.Notify(doneCh, os.Interrupt)
+	go func() {
+		<-doneCh
+		log.Println("Interrupt signal received, graceful shutdown...")
+		fSrv.Shutdown()
+	}()
+
 	fSrv.Run(srvAddr)
 }
