@@ -13,10 +13,10 @@ services:
       - ${POSTGRES_PORT}:5432
     volumes:
       - ./init/init.sql:/docker-entrypoint-initdb.d/init.sql
-  employee2:
+  employees:
     build: .
-    image: employee2
-    container_name: emp2
+    image: employees
+    container_name: empls
     ports:
       - "8080:8080"
     volumes:
