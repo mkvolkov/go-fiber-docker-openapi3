@@ -1,23 +1,26 @@
-**employees** is a CRUD project, demonstrating:
-* Clean Architecture in Golang
-* koanf
-* Fiber framework
-* Docker
-* docker compose
-* PostgreSQL
-* pgx
-* OpenAPI 3.0
+# Demo CRUD project in Golang
 
-###Launch project
+## Techniques covered:
 
-Launch project:
+- Clean Architecture in Golang
+- koanf (reading config files)
+- Fiber framework
+- Docker
+- docker compose
+- PostgreSQL (dockerized; with test data)
+- pgx
+- OpenAPI 3.0 (generating the specification)
+
+### Run the project:
+
+Basic usage:
 
 ```
 docker compose up
 ```
 
-Launch project as a daemon:
+Generate the OpenAPI 3.0 specification:
 
 ```
-docker compose up -d
+go run main.go -gen
 ```
