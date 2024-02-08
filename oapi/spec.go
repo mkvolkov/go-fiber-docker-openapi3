@@ -38,7 +38,7 @@ func CreateOpenAPI() {
 	reflector := openapi3.NewReflector()
 	reflector.Spec = &openapi3.Spec{Openapi: "3.0.3"}
 	reflector.Spec.Info.
-		WithTitle("Employee2 API").
+		WithTitle("Employees API").
 		WithVersion("2.0").
 		WithDescription("Employees API, Demo Golang CRUD & OpenAPI 3.0")
 
