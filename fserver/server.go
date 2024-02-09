@@ -16,7 +16,7 @@ func NewFServer() *FServer {
 		CaseSensitive: true,
 		StrictRouting: true,
 		ServerHeader:  "Fiber",
-		AppName:       "Employee2",
+		AppName:       "Employees",
 	})}
 }
 
