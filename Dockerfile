@@ -4,10 +4,10 @@ WORKDIR /app
 
 COPY go.mod go.sum ./
 ADD cmd ./cmd
-ADD fserver ./fserver
 ADD handlers ./handlers
 ADD logic ./logic
 ADD models ./models
+ADD pkg ./pkg
 ADD repository ./repository
 COPY cfg.yml ./
 RUN go mod tidy

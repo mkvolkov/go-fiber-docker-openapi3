@@ -1,10 +1,10 @@
 package main
 
 import (
-	"employees/fserver"
 	"employees/handlers"
 	"employees/logic"
 	"employees/oapi"
+	"employees/pkg/fserver"
 	"employees/repository"
 	"flag"
 	"log"
