@@ -1,14 +1,15 @@
-FROM golang:1.21.6-bookworm
+FROM golang:1.22.0-bookworm
 
 WORKDIR /app
 
 COPY go.mod go.sum ./
+ADD cmd ./cmd
 ADD fserver ./fserver
 ADD handlers ./handlers
 ADD logic ./logic
 ADD models ./models
 ADD repository ./repository
-COPY main.go cfg.yml ./
+COPY cfg.yml ./
 RUN go mod tidy
 
-CMD [ "go", "run", "main.go" ]
+CMD [ "go", "run", "cmd/app/main.go" ]
