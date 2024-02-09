@@ -1,6 +1,7 @@
 package main
 
 import (
+	"employees/config"
 	"employees/handlers"
 	"employees/logic"
 	"employees/oapi"
@@ -10,10 +11,6 @@ import (
 	"log"
 	"os"
 	"os/signal"
-
-	"github.com/knadh/koanf/parsers/yaml"
-	"github.com/knadh/koanf/providers/file"
-	"github.com/knadh/koanf/v2"
 )
 
 func main() {
@@ -29,22 +26,14 @@ func main() {
 		return
 	}
 
-	k := koanf.New(".")
-	err := k.Load(file.Provider("./cfg.yml"), yaml.Parser())
+	Cfg, err := config.ReadConfig("./config/cfg.yml")
 	if err != nil {
 		log.Fatalln("Error loading configuration: ", err)
 	}
 
-	srvAddr := k.String("server.host") + ":" + k.String("server.port")
+	srvAddr := Cfg.Srv.Host + ":" + Cfg.Srv.Port
 
-	pgCfg := repository.PgCfg{}
-	pgCfg.Host = k.String("postgres.host")
-	pgCfg.Port = k.String("postgres.port")
-	pgCfg.Username = k.String("postgres.username")
-	pgCfg.Password = k.String("postgres.password")
-	pgCfg.DBName = k.String("postgres.dbname")
-
-	dbConn, err := repository.ConnectDB(&pgCfg)
+	dbConn, err := repository.ConnectDB(&Cfg.PgCfg)
 	if err != nil {
 		log.Fatalln("Error connecting to database: ", err)
 	}

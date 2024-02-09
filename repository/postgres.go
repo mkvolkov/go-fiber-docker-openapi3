@@ -2,6 +2,7 @@ package repository
 
 import (
 	"context"
+	"employees/config"
 	"fmt"
 
 	"github.com/jackc/pgx/v5"
@@ -15,7 +16,7 @@ type PgCfg struct {
 	DBName   string
 }
 
-func ConnectDB(cfg *PgCfg) (*pgx.Conn, error) {
+func ConnectDB(cfg *config.Postgres) (*pgx.Conn, error) {
 	pgURL := fmt.Sprintf(
 		"postgres://%s:%s@%s:%s/%s",
 		cfg.Username,
