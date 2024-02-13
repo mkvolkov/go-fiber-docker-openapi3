@@ -1,4 +1,4 @@
-package handlers
+package httpv1
 
 import (
 	"employees/logic"

@@ -1,7 +1,7 @@
-package handlers
+package httpv1
 
 import (
-	"employees/models"
+	"employees/internal/models"
 	"strconv"
 
 	"github.com/goccy/go-json"

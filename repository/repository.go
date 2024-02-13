@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"employees/models"
+	"employees/internal/models"
 
 	"github.com/jackc/pgx/v5"
 )

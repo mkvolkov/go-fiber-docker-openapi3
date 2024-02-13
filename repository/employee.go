@@ -2,7 +2,7 @@ package repository
 
 import (
 	"context"
-	"employees/models"
+	"employees/internal/models"
 	"fmt"
 	"sync"
 

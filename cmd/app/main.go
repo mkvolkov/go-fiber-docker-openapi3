@@ -2,10 +2,10 @@ package main
 
 import (
 	"employees/config"
-	"employees/handlers"
+	httpv1 "employees/internal/controller/http/v1"
 	"employees/logic"
-	"employees/oapi"
 	"employees/pkg/fserver"
+	"employees/pkg/oapi"
 	"employees/repository"
 	"flag"
 	"log"
@@ -42,7 +42,7 @@ func main() {
 
 	pgRepo := repository.NewRepository(dbConn)
 	empLogic := logic.NewLogic(pgRepo)
-	fHandlers := handlers.NewHandler(empLogic)
+	fHandlers := httpv1.NewHandler(empLogic)
 
 	fHandlers.CreateRoutes(fSrv.FiberApp)
 

@@ -5,9 +5,8 @@ WORKDIR /app
 COPY go.mod go.sum ./
 ADD cmd ./cmd
 ADD config ./config
-ADD handlers ./handlers
+ADD internal ./internal
 ADD logic ./logic
-ADD models ./models
 ADD pkg ./pkg
 ADD repository ./repository
 RUN go mod tidy

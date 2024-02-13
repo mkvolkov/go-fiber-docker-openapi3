@@ -1,7 +1,7 @@
 package logic
 
 import (
-	"employees/models"
+	"employees/internal/models"
 	"employees/repository"
 )
 
