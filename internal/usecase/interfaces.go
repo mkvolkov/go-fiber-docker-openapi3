@@ -1,8 +1,7 @@
-package logic
+package usecase
 
 import (
 	"employees/internal/models"
-	"employees/repository"
 )
 
 type Employee interface {
@@ -10,14 +9,4 @@ type Employee interface {
 	FireEmployee(empID int) (models.FEmployee, error)
 	GetVacationDays(empID int) (models.Vdays, error)
 	GetEmployeeByName(name string) ([]models.FEmployee, error)
-}
-
-type EmpLogic struct {
-	Employee
-}
-
-func NewLogic(repo *repository.Repository) *EmpLogic {
-	return &EmpLogic{
-		Employee: NewEmpRepo(repo.Employee),
-	}
 }

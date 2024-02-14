@@ -3,10 +3,11 @@ package main
 import (
 	"employees/config"
 	httpv1 "employees/internal/controller/http/v1"
-	"employees/logic"
+	"employees/internal/repo"
+	"employees/internal/usecase"
 	"employees/pkg/fserver"
 	"employees/pkg/oapi"
-	"employees/repository"
+	"employees/pkg/postgres"
 	"flag"
 	"log"
 	"os"
@@ -33,16 +34,16 @@ func main() {
 
 	srvAddr := Cfg.Srv.Host + ":" + Cfg.Srv.Port
 
-	dbConn, err := repository.ConnectDB(&Cfg.PgCfg)
+	dbConn, err := postgres.ConnectDB(&Cfg.PgCfg)
 	if err != nil {
 		log.Fatalln("Error connecting to database: ", err)
 	}
 
 	fSrv := fserver.NewFServer()
 
-	pgRepo := repository.NewRepository(dbConn)
-	empLogic := logic.NewLogic(pgRepo)
-	fHandlers := httpv1.NewHandler(empLogic)
+	pgRepo := repo.NewRepository(dbConn)
+	empUsecase := usecase.NewEmpUsecase(pgRepo)
+	fHandlers := httpv1.NewHandler(empUsecase)
 
 	fHandlers.CreateRoutes(fSrv.FiberApp)
 

@@ -1,8 +1,9 @@
-package repository
+package repo
 
 import (
 	"context"
 	"employees/internal/models"
+	"employees/internal/usecase"
 	"fmt"
 	"sync"
 
@@ -10,24 +11,26 @@ import (
 	"github.com/jackc/pgx/v5"
 )
 
-type EmpPostgres struct {
+type Repository struct {
 	mtx  sync.Mutex
 	conn *pgx.Conn
+
+	usecase.Employee
 }
 
-func NewEmpPostgres(pgConn *pgx.Conn) *EmpPostgres {
-	return &EmpPostgres{conn: pgConn}
+func NewRepository(pgConn *pgx.Conn) *Repository {
+	return &Repository{conn: pgConn}
 }
 
-func (e *EmpPostgres) HireEmployee(emp *models.PEmployee) (models.FEmployee, error) {
+func (r *Repository) HireEmployee(emp *models.PEmployee) (models.FEmployee, error) {
 	sqlQuery := `
 		INSERT INTO employees
 		(name, phone, gender, age, email, address, vdays)
 		VALUES ($1, $2, $3, $4, $5, $6, $7)
 		RETURNING id, name, phone, gender, age, email, address, vdays`
 
-	e.mtx.Lock()
-	hired := e.conn.QueryRow(
+	r.mtx.Lock()
+	hired := r.conn.QueryRow(
 		context.Background(),
 		sqlQuery,
 		emp.Name,
@@ -38,7 +41,7 @@ func (e *EmpPostgres) HireEmployee(emp *models.PEmployee) (models.FEmployee, err
 		emp.Address,
 		emp.Vdays,
 	)
-	e.mtx.Unlock()
+	r.mtx.Unlock()
 
 	var hiredEmp models.FEmployee
 	var vdaysNull = null.NewInt(0, true)
@@ -65,7 +68,7 @@ func (e *EmpPostgres) HireEmployee(emp *models.PEmployee) (models.FEmployee, err
 	return hiredEmp, nil
 }
 
-func (e *EmpPostgres) FireEmployee(empID int) (models.FEmployee, error) {
+func (e *Repository) FireEmployee(empID int) (models.FEmployee, error) {
 	sqlQuery := `DELETE FROM employees WHERE id = $1
 		RETURNING id, name, phone, gender, age, email, address, vdays`
 
@@ -102,7 +105,7 @@ func (e *EmpPostgres) FireEmployee(empID int) (models.FEmployee, error) {
 	return firedEmp, nil
 }
 
-func (e *EmpPostgres) GetVacationDays(empID int) (models.Vdays, error) {
+func (e *Repository) GetVacationDays(empID int) (models.Vdays, error) {
 	sqlQuery := `SELECT vdays FROM employees WHERE id = $1`
 
 	daysRes := e.conn.QueryRow(
@@ -127,7 +130,7 @@ func (e *EmpPostgres) GetVacationDays(empID int) (models.Vdays, error) {
 	return vdaysRet, nil
 }
 
-func (e *EmpPostgres) GetEmployeeByName(name string) ([]models.FEmployee, error) {
+func (e *Repository) GetEmployeeByName(name string) ([]models.FEmployee, error) {
 	sqlQuery := fmt.Sprintf("SELECT * FROM employees WHERE name ILIKE '%%%s%%'", name)
 
 	emplsRes, err := e.conn.Query(

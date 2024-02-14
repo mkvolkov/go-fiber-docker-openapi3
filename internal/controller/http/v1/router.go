@@ -1,16 +1,16 @@
 package httpv1
 
 import (
-	"employees/logic"
+	"employees/internal/usecase"
 
 	"github.com/gofiber/fiber/v2"
 )
 
 type Handler struct {
-	actions logic.Employee
+	actions usecase.Employee
 }
 
-func NewHandler(emplogic logic.Employee) *Handler {
+func NewHandler(emplogic usecase.Employee) *Handler {
 	return &Handler{actions: emplogic}
 }
 
