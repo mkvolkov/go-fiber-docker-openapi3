@@ -15,7 +15,7 @@ func NewHandler(emplogic usecase.Employee) *Handler {
 }
 
 func (h *Handler) CreateRoutes(app *fiber.App) {
-	app.Put("/hire", h.hireEmployee)
+	app.Post("/hire", h.hireEmployee)
 	app.Delete("/fire/:id", h.fireEmployee)
 	app.Get("/vdays/:id", h.getVacationDays)
 	app.Get("/find/:name", h.findEmployeeByName)
