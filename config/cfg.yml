@@ -2,7 +2,7 @@ server:
   port: '8080'
 
 postgres:
-  host: 'postgresql'
+  host: '127.0.0.1'
   port: '5432'
   username: 'postgres'
   password: 'postpass'
