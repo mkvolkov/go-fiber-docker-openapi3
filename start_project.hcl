@@ -14,7 +14,6 @@ job "project" {
             
             port "postgr" {
                 to = 5432
-                static = 5432
             }
         }
 
@@ -43,7 +42,7 @@ job "project" {
 
             config {
                 network_mode = "host"
-                image = "mkvolkov/employees:latest"
+                image = "mkvolkov/employees:2.1.0"
                 ports = ["empls"]
             }
 
