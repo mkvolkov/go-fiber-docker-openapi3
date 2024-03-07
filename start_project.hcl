@@ -4,20 +4,43 @@ job "project" {
 
     group "empls" {
         count = 1
+
         network {
             mode = "host"
 
             port "empls" {
                 to = 8080
-                static = 8080
             }
-            
-            port "postgr" {
+        }
+
+        task "empls" {
+            driver = "docker"
+
+            config {
+                network_mode = "host"
+                image = "mkvolkov/employees:2.2.0"
+                ports = ["empls"]
+            }
+
+            resources {
+                cores = 1
+                memory = 1024
+            }
+        }
+    }
+
+    group "pgsql" {
+        count = 1
+
+        network {
+            mode = "host"
+
+            port "pgsql" {
                 to = 5432
             }
         }
 
-        task "postgr" {
+        task "pgsql" {
             driver = "docker"
 
             env {
@@ -29,26 +52,16 @@ job "project" {
             config {
                 network_mode = "host"
                 image = "postgres"
-                ports = ["postgr"]
+                ports = ["pgsql"]
 
                 volumes = [
                     "/home/mike/tutorials/go-fiber-docker-openapi3/init:/docker-entrypoint-initdb.d"
                 ]
             }
-        }
-
-        task "empls" {
-            driver = "docker"
-
-            config {
-                network_mode = "host"
-                image = "mkvolkov/employees:2.1.0"
-                ports = ["empls"]
-            }
 
             resources {
-                cores = 2
-                memory = 2048
+                cores = 1
+                memory = 1024
             }
         }
     }

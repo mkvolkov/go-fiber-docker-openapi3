@@ -34,14 +34,6 @@ func main() {
 
 	srvAddr := Cfg.Srv.Host + ":" + Cfg.Srv.Port
 
-	osHost := os.Getenv("NOMAD_IP_postgr")
-	osPort := os.Getenv("NOMAD_PORT_postgr")
-
-	if osHost != "" && osPort != "" {
-		Cfg.PgCfg.Host = osHost
-		Cfg.PgCfg.Port = osPort
-	}
-
 	dbConn, err := postgres.ConnectDB(&Cfg.PgCfg)
 	if err != nil {
 		log.Fatalln("Error connecting to database: ", err)
