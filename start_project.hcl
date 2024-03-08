@@ -18,7 +18,7 @@ job "project" {
 
             config {
                 network_mode = "host"
-                image = "mkvolkov/employees:2.2.0"
+                image = "mkvolkov/employees:2.2.1"
                 ports = ["empls"]
             }
 
