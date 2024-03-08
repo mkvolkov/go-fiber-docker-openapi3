@@ -9,6 +9,7 @@ import (
 	"employees/pkg/oapi"
 	"employees/pkg/postgres"
 	"flag"
+	"fmt"
 	"log"
 	"os"
 	"os/signal"
@@ -31,6 +32,13 @@ func main() {
 	if err != nil {
 		log.Fatalln("Error loading configuration: ", err)
 	}
+
+	nomHost := os.Getenv("NOMAD_IP_empls")
+	if nomHost != "" {
+		Cfg.PgCfg.Host = nomHost
+	}
+
+	fmt.Println("NOMAD_IP_empls: ", nomHost)
 
 	srvAddr := Cfg.Srv.Host + ":" + Cfg.Srv.Port
 
