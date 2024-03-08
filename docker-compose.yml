@@ -13,8 +13,16 @@ services:
       - ${POSTGRES_PORT}:5432
     volumes:
       - ./init/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
   employees:
     build: .
+    depends_on:
+      postgresql:
+        condition: service_healthy
     image: employees
     container_name: empls
     ports:
