@@ -42,7 +42,7 @@ func CreateOpenAPI() {
 		WithVersion("2.0").
 		WithDescription("Employees API, Demo Golang CRUD & OpenAPI 3.0")
 
-	hireEmp, _ := reflector.NewOperationContext(http.MethodPut, "/hire")
+	hireEmp, _ := reflector.NewOperationContext(http.MethodPost, "/hire")
 	hireEmp.AddReqStructure(new(Employee))
 	hireEmp.AddRespStructure(new(Employee), openapi.WithHTTPStatus(http.StatusOK))
 	hireEmp.AddRespStructure(new(ErrResponse), openapi.WithHTTPStatus(http.StatusInternalServerError))

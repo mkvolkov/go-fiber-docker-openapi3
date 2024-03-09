@@ -1,9 +1,0 @@
-server:
-  port: '8080'
-
-postgres:
-  host: 'postgresql'
-  port: '5432'
-  username: 'postgres'
-  password: 'postpass'
-  dbname: 'emp_db'

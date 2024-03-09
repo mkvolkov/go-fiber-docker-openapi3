@@ -1,8 +1,6 @@
-package usecase
+package interfaces
 
-import (
-	"employees/internal/models"
-)
+import "employees/pkg/models"
 
 type Employee interface {
 	HireEmployee(emp *models.PEmployee) (models.FEmployee, error)

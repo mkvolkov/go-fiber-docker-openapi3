@@ -2,8 +2,8 @@ package repo
 
 import (
 	"context"
-	"employees/internal/models"
-	"employees/internal/usecase"
+	"employees/pkg/interfaces"
+	"employees/pkg/models"
 	"fmt"
 	"sync"
 
@@ -15,7 +15,7 @@ type Repository struct {
 	mtx  sync.Mutex
 	conn *pgx.Conn
 
-	usecase.Employee
+	interfaces.Employee
 }
 
 func NewRepository(pgConn *pgx.Conn) *Repository {
