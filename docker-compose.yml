@@ -22,7 +22,7 @@ services:
     depends_on:
       postgresql:
         condition: service_healthy
-    image: mkvolkov/employees:3.0.0
+    image: mkvolkov/employees:3.1.0
     container_name: empls
     ports:
       - "8080:8080"

@@ -2,9 +2,9 @@ FROM golang:1.22.0-bookworm
 
 WORKDIR /app
 
-COPY go.mod go.sum .env ./
-ADD cmd ./cmd
-ADD pkg ./pkg
-RUN go mod tidy
+COPY . .
+RUN go build -o /empl cmd/main.go
 
-CMD [ "go", "run", "cmd/main.go" ]
+EXPOSE 8080
+
+CMD ["/empl"]
