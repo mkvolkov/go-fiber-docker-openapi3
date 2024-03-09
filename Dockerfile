@@ -7,4 +7,4 @@ RUN go build -o /empl cmd/main.go
 
 EXPOSE 8080
 
-CMD ["/empl"]
+ENTRYPOINT ["/empl"]
