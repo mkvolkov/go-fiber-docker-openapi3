@@ -18,7 +18,7 @@ job "project" {
 
             config {
                 network_mode = "host"
-                image = "mkvolkov/employees:2.2.1"
+                image = "mkvolkov/employees:3.0.0"
                 ports = ["empls"]
             }
 
@@ -44,7 +44,7 @@ job "project" {
             driver = "docker"
 
             env {
-                POSTGRES_USER = "postgres"
+                POSTGRES_USER = "mike"
                 POSTGRES_PASSWORD = "postpass"
                 POSTGRES_DB = "emp_db"
             }

@@ -2,27 +2,19 @@ package postgres
 
 import (
 	"context"
-	"employees/config"
+	"employees/pkg/config"
 	"fmt"
 
 	"github.com/jackc/pgx/v5"
 )
 
-type PgCfg struct {
-	Host     string
-	Port     string
-	Username string
-	Password string
-	DBName   string
-}
-
-func ConnectDB(cfg *config.Postgres) (*pgx.Conn, error) {
+func ConnectDB(cfg *config.Config) (*pgx.Conn, error) {
 	pgURL := fmt.Sprintf(
 		"postgres://%s:%s@%s:%s/%s",
-		cfg.Username,
-		cfg.Password,
-		cfg.Host,
-		cfg.Port,
+		cfg.DBUsername,
+		cfg.DBPassword,
+		cfg.DBHost,
+		cfg.DBPort,
 		cfg.DBName,
 	)
 

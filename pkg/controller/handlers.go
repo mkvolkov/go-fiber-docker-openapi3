@@ -1,14 +1,14 @@
-package httpv1
+package controller
 
 import (
-	"employees/internal/models"
+	"employees/pkg/models"
 	"strconv"
 
 	"github.com/goccy/go-json"
 	"github.com/gofiber/fiber/v2"
 )
 
-func (h *Handler) hireEmployee(c *fiber.Ctx) error {
+func (h *Controller) hireEmployee(c *fiber.Ctx) error {
 	var inputEmp models.PEmployee
 
 	err := json.Unmarshal(c.Body(), &inputEmp)
@@ -24,7 +24,7 @@ func (h *Handler) hireEmployee(c *fiber.Ctx) error {
 	return c.Status(fiber.StatusOK).JSON(hiredID)
 }
 
-func (h *Handler) fireEmployee(c *fiber.Ctx) error {
+func (h *Controller) fireEmployee(c *fiber.Ctx) error {
 	ID := c.Params("id")
 
 	fireID, err := strconv.Atoi(ID)
@@ -40,7 +40,7 @@ func (h *Handler) fireEmployee(c *fiber.Ctx) error {
 	return c.Status(fiber.StatusOK).JSON(firedID)
 }
 
-func (h *Handler) getVacationDays(c *fiber.Ctx) error {
+func (h *Controller) getVacationDays(c *fiber.Ctx) error {
 	ID := c.Params("id")
 
 	getvID, err := strconv.Atoi(ID)
@@ -56,7 +56,7 @@ func (h *Handler) getVacationDays(c *fiber.Ctx) error {
 	return c.Status(fiber.StatusOK).JSON(vDays)
 }
 
-func (h *Handler) findEmployeeByName(c *fiber.Ctx) error {
+func (h *Controller) findEmployeeByName(c *fiber.Ctx) error {
 	name := c.Params("name")
 
 	empls, err := h.actions.GetEmployeeByName(name)
