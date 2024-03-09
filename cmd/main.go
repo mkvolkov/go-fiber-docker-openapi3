@@ -3,7 +3,9 @@ package main
 import (
 	"employees/pkg/config"
 	"employees/pkg/controller"
+	"employees/pkg/oapi"
 	"employees/pkg/postgres"
+	"flag"
 	"fmt"
 	"log"
 	"os"
@@ -12,6 +14,18 @@ import (
 )
 
 func main() {
+	genSpec := flag.Bool("gen", false, "Generate OpenAPI spec")
+	flag.Parse()
+
+	if *genSpec {
+		log.Println("Generating OpenAPI spec...")
+
+		oapi.CreateOpenAPI()
+
+		log.Println("Done.")
+		return
+	}
+
 	Cfg, err := config.LoadConfig()
 	if err != nil {
 		log.Fatalln("Error loading configuration: ", err)
