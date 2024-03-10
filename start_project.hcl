@@ -6,11 +6,7 @@ job "project" {
         count = 1
 
         network {
-            mode = "host"
-
-            port "empls" {
-                to = 8080
-            }
+            port "empls" {}
         }
 
         task "empls" {
@@ -18,13 +14,8 @@ job "project" {
 
             config {
                 network_mode = "host"
-                image = "mkvolkov/employees:3.0.0"
+                image = "mkvolkov/employees:3.1.0"
                 ports = ["empls"]
-            }
-
-            resources {
-                cores = 1
-                memory = 1024
             }
         }
     }
@@ -33,11 +24,7 @@ job "project" {
         count = 1
 
         network {
-            mode = "host"
-
-            port "pgsql" {
-                to = 5432
-            }
+            port "pgsql" {}
         }
 
         task "pgsql" {
@@ -57,11 +44,6 @@ job "project" {
                 volumes = [
                     "/home/mike/tutorials/go-fiber-docker-openapi3/init:/docker-entrypoint-initdb.d"
                 ]
-            }
-
-            resources {
-                cores = 1
-                memory = 1024
             }
         }
     }

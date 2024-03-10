@@ -6,7 +6,6 @@ import (
 	"employees/pkg/oapi"
 	"employees/pkg/postgres"
 	"flag"
-	"fmt"
 	"log"
 	"os"
 
@@ -35,8 +34,6 @@ func main() {
 	if nomHost != "" {
 		Cfg.DBHost = nomHost
 	}
-
-	fmt.Println("NOMAD_IP_empls: ", nomHost)
 
 	dbConn, err := postgres.ConnectDB(&Cfg)
 	if err != nil {
