@@ -25,4 +25,5 @@ func CreateRoutes(app *fiber.App, db *pgx.Conn) {
 	app.Delete("/fire/:id", c.fireEmployee)
 	app.Get("/vdays/:id", c.getVacationDays)
 	app.Get("/find/:name", c.findEmployeeByName)
+	app.Get("/health", c.healthCheck)
 }

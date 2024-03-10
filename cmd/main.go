@@ -35,7 +35,7 @@ func main() {
 		Cfg.Port = *argPort
 	}
 
-	nomHost := os.Getenv("NOMAD_IP_empls")
+	nomHost := os.Getenv("NOMAD_IP_httpemp")
 	if nomHost != "" {
 		Cfg.DBHost = nomHost
 	}

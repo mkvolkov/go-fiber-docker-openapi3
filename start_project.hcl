@@ -6,7 +6,7 @@ job "project" {
         count = 4
 
         network {
-            port "empls" {}
+            port "httpemp" {}
         }
 
         task "empls" {
@@ -15,11 +15,22 @@ job "project" {
             config {
                 network_mode = "host"
                 image = "mkvolkov/employees:3.1.0"
-                ports = ["empls"]
+                ports = ["httpemp"]
 
                 args = [
-                    "-port", "${NOMAD_PORT_empls}",
+                    "-port", "${NOMAD_PORT_httpemp}",
                 ]
+            }
+
+            service {
+                name = "employees"
+                port = "httpemp"
+                check {
+                    type = "http"
+                    path = "/health"
+                    interval = "10s"
+                    timeout = "2s"
+                }
             }
         }
     }

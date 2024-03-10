@@ -66,3 +66,7 @@ func (h *Controller) findEmployeeByName(c *fiber.Ctx) error {
 
 	return c.Status(fiber.StatusOK).JSON(empls)
 }
+
+func (h *Controller) healthCheck(c *fiber.Ctx) error {
+	return c.Status(fiber.StatusOK).SendString("OK")
+}
