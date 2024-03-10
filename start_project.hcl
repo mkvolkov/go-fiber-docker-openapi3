@@ -3,7 +3,7 @@ job "project" {
     type = "service"
 
     group "empls" {
-        count = 1
+        count = 4
 
         network {
             port "empls" {}
@@ -16,6 +16,10 @@ job "project" {
                 network_mode = "host"
                 image = "mkvolkov/employees:3.1.0"
                 ports = ["empls"]
+
+                args = [
+                    "-port", "${NOMAD_PORT_empls}",
+                ]
             }
         }
     }

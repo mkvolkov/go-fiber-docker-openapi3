@@ -14,6 +14,7 @@ import (
 
 func main() {
 	genSpec := flag.Bool("gen", false, "Generate OpenAPI spec")
+	argPort := flag.String("port", "8080", "Port to listen on")
 	flag.Parse()
 
 	if *genSpec {
@@ -28,6 +29,10 @@ func main() {
 	Cfg, err := config.LoadConfig()
 	if err != nil {
 		log.Fatalln("Error loading configuration: ", err)
+	}
+
+	if *argPort != "" {
+		Cfg.Port = *argPort
 	}
 
 	nomHost := os.Getenv("NOMAD_IP_empls")
