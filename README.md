@@ -52,7 +52,7 @@ nomad run start_project.hcl
 
 URL to check the project with curl, Insomnia, Postman, Advanced REST Client, etc.:
 
-http://localhost:<port>/find/mikhail
+http://localhost:port/find/mikhail
 
 (simple GET request without the body)
 
