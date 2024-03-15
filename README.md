@@ -3,7 +3,6 @@
 ## Techniques covered:
 
 - Clean Architecture in Golang
-- koanf (reading config files)
 - Fiber framework
 - Docker
 - docker compose
