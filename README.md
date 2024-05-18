@@ -13,6 +13,14 @@
 - Consul
 - HAProxy
 
+### Requirements
+
+- Docker installed, Docker daemon is running
+- PostgreSQL daemon must be disabled
+
+Warning: if you don't have PostgreSQL Docker images on your machine, the
+start of the project can be long; first instances of "empls" can be unhealthy
+
 ### Run the project with Docker Compose:
 
 ```
